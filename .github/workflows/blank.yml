@@ -1,0 +1,17 @@
+name: Build FFMod
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ndk-build/action@master
+      - run: |
+          cd app/jni
+          ndk-build NDK_PROJECT_PATH=../.. APP_BUILD_SCRIPT=./Android.mk -j4
+      - uses: actions/upload-artifact@v3
+        with:
+          name: libfiremod.so
+          path: app/libs/arm64-v8a/libfiremod.so
