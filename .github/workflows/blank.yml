@@ -20,11 +20,10 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Configurar Android SDK
+    - name: Configurar Android SDK e NDK
       uses: android-actions/setup-android@v3
-
-    - name: Aceitar Licenças do Android SDK
-      run: yes | sdkmanager --licenses || true
+      with:
+        include-ndk: true
 
     - name: Gerar Gradle Wrapper (se em falta)
       run: |
